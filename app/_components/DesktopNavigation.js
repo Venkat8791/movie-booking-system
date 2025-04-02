@@ -1,18 +1,12 @@
 "use client";
 import Link from "next/link";
-import { Home, Clapperboard, Film, Phone, Menu, X } from "lucide-react";
+import LoginButton from "./LoginButton";
 
-const navLinks = [
-  { name: "Home", href: "/", icon: <Home /> },
-  { name: "Movies", href: "/movies", icon: <Clapperboard /> },
-  { name: "Cinemas", href: "/about-us", icon: <Film /> },
-  { name: "Contact Us", href: "/contact-us", icon: <Phone /> },
-];
-export default function Navigation() {
+export default function DesktopNavigation({ navLinks }) {
   return (
     // desktop navigation
     <nav className="hidden lg:block">
-      <ul className="flex gap-8 justify-center items-center font-bold">
+      <ul className="flex gap-4 justify-center items-center font-bold">
         {navLinks.map((link) => (
           <li key={link.name}>
             <Link
@@ -24,6 +18,8 @@ export default function Navigation() {
             </Link>
           </li>
         ))}
+
+        <LoginButton />
       </ul>
     </nav>
   );
