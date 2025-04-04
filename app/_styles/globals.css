@@ -2,13 +2,14 @@
 
 /* 🌟 Global Styles */
 :root {
+  --background-light: #f9f9f9; /* Light Gray */
+  --background-white: #ffffff; /* Pure White */
+  --text-dark: #1e1e1e; /* Almost Black */
+  --text-gray: #4a4a4a; /* Dark Gray */
   --primary-color: #e50914; /* Netflix Red */
-  --primary-color-light: #e8222c; /* Light Red */
-  --secondary-color: #1e1e1e; /* Dark Gray */
-  --text-light: #ffffff;
-  --text-dark: #020202;
-  --background-dark: #121212;
-  --background-light: #f9f9f9;
+  --secondary-color: #ff9800; /* Orange */
+  --accent-blue: #007aff; /* iOS Blue */
+  --border-light: #e0e0e0; /* Light Border */
   --background-gray: #e0e0e0;
 }
 
@@ -21,18 +22,10 @@ body {
   font-size: 1rem; /* Default text-base */
 }
 
-@media (min-width: 640px) {
-  body {
-    font-size: 0.875rem; /* sm:text-xs */
-  }
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
 }
-
-@media (min-width: 768px) {
-  body {
-    font-size: 0.9375rem; /* md:text-sm */
-  }
-}
-
 li {
   list-style: none;
   padding: 0.25rem 0.5rem;

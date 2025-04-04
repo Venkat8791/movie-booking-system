@@ -6,7 +6,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Header />
-        <div>{children}</div>
+        <div className="max-w-7xl mx-auto">{children}</div>
       </body>
     </html>
   );

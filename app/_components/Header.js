@@ -10,8 +10,8 @@ import NavToggleButton from "./NavToggleButton";
 const navLinks = [
   { name: "Home", href: "/", icon: <Home /> },
   { name: "Movies", href: "/movies", icon: <Clapperboard /> },
-  { name: "Cinemas", href: "/about-us", icon: <Film /> },
-  { name: "Contact", href: "/contact-us", icon: <Phone /> },
+  { name: "Cinemas", href: "/cinemas", icon: <Film /> },
+  { name: "Contact", href: "/contact", icon: <Phone /> },
 ];
 
 export default function Header() {

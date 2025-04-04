@@ -5,14 +5,15 @@ import LoginButton from "./LoginButton";
 
 function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
   return (
-    <nav
-      className={`lg:hidden fixed top-0 right-0 w-64 h-full flex flex-col bg-white p-6 shadow-md transition-transform ${
+    <aside
+      className={`lg:hidden fixed top-0 right-0 w-64 h-full flex flex-col bg-white z-50  p-6 shadow-md transition-transform ${
         isMenuOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
       <button onClick={() => setIsMenuOpen(false)} className="">
         <X className="w-7 h-7" />
       </button>
+
       <ul className="mt-10 space-y-6 text-left">
         {navLinks.map((link) => (
           <li key={link.name}>
@@ -29,7 +30,7 @@ function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
 
         <LoginButton />
       </ul>
-    </nav>
+    </aside>
   );
 }
 
