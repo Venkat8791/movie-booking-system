@@ -35,7 +35,7 @@ function MovieCard({ movie }) {
         </div>
 
         <Link href={`/movies/${movie.id}`} passHref>
-          <button className="mt-3 w-full bg-red-400 text-white py-2 rounded hover:bg-red-600 transition-colors">
+          <button className="mt-3 w-full bg-[var(--accent)] text-white py-2 rounded hover:bg-[var(--accent-hover)] transition-colors">
             Book Now
           </button>
         </Link>

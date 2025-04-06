@@ -2,15 +2,33 @@
 
 /* 🌟 Global Styles */
 :root {
-  --background-light: #f9f9f9; /* Light Gray */
-  --background-white: #ffffff; /* Pure White */
-  --text-dark: #1e1e1e; /* Almost Black */
-  --text-gray: #4a4a4a; /* Dark Gray */
-  --primary-color: #e50914; /* Netflix Red */
-  --secondary-color: #ff9800; /* Orange */
-  --accent-blue: #007aff; /* iOS Blue */
-  --border-light: #e0e0e0; /* Light Border */
-  --background-gray: #e0e0e0;
+  /* Light Theme */
+  --background: #fafafa;
+  --card: #ffffff;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-light: #fef3c7;
+  --border: #e4e4e7;
+  --muted: #f4f4f5;
+  --disabled: #a1a1aa;
+  --error: #dc2626;
+}
+
+.dark {
+  /* Dark Theme */
+  --background: #121212;
+  --card: #1e1e1e;
+  --text-primary: #f9f9f9;
+  --text-secondary: #d4d4d8;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-light: #78350f;
+  --border: #27272a;
+  --muted: #3f3f46;
+  --disabled: #52525b;
+  --error: #f87171;
 }
 
 @layer components {
@@ -19,8 +37,8 @@
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid var(--text-dark);
-    border-right-color: var(--text-dark);
+    border: 8px solid var(--text-primary);
+    border-right-color: var(--text-primary);
     animation: rotate 1s infinite linear;
   }
 
@@ -29,7 +47,7 @@
     width: 20px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid var(--text-dark);
+    border: 2px solid var(--text-primary);
     border-right-color: transparent;
     animation: rotate 1s infinite linear;
   }
@@ -42,8 +60,8 @@
 }
 
 body {
-  background-color: var(--background-light);
-  color: var(--text-dark);
+  background-color: var(--background);
+  color: var(--text-primary);
   max-width: 90vw;
   min-width: 10vw;
   margin: 0 auto;
@@ -61,8 +79,8 @@ li {
 }
 
 li:hover {
-  background-color: var(--background-gray);
-  /* color: var(--text-light); */
+  background-color: var(--accent-hover);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
