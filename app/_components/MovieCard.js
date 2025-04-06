@@ -19,7 +19,7 @@ function MovieCard({ movie }) {
       <div className="w-full max-w-xs mx-auto">
         <Image
           alt={movie.title}
-          src={movie.poster}
+          src={movie.posterUrl}
           width={500}
           height={750}
           className="w-full h-auto object-contain"
@@ -29,8 +29,8 @@ function MovieCard({ movie }) {
       <div className="p-4 flex flex-col flex-grow justify-between">
         <div>
           <h2 className="text-gray-900 text-lg font-semibold">{movie.title}</h2>
-          <p className="text-gray-600">{movie.genre.join(", ")}</p>
-          <p className="text-gray-600 italic">{movie.language.join(", ")}</p>
+          <p className="text-gray-600">{movie.genre}</p>
+          <p className="text-gray-600 italic">{movie.language}</p>
           <p className="text-yellow-400 font-bold mt-1">⭐ {movie.rating}</p>
         </div>
 

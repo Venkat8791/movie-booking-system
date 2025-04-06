@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import MovieCard from "../_components/MovieCard";
+import MovieList from "../_components/MovieList";
 
 const movies = [
   {
@@ -102,11 +103,9 @@ export default function Page() {
   return (
     <div>
       <h1>Now Showing</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
+      <Suspense>
+        <MovieList />
+      </Suspense>
     </div>
   );
 }
