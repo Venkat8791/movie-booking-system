@@ -63,7 +63,7 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   max-width: 90vw;
-  min-width: 10vw;
+  /* min-width: 10vw; */
   margin: 0 auto;
   font-size: 1rem; /* Default text-base */
 }
@@ -85,7 +85,5 @@ li:hover {
 }
 
 button {
-  border-radius: 1rem;
-  border: none;
   cursor: pointer;
 }

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
-function MovieDetails({movie}) {
-    const { posterUrl, title, genre, language, rating, duration } = movie;
+function MovieDetails({ movie }) {
+  const { posterUrl, title, genre, language, rating, duration } = movie;
   return (
     <div className="flex flex-col rounded justify-center sm:flex-row bg-[linear-gradient(to_right,_#f7f2f2,_#ece7e4,_#f3f1f0)]">
       <div className="hidden sm:block w-full sm:w-1/3">

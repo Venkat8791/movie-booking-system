@@ -17,3 +17,18 @@ export async function getMovie(id) {
   console.log(data);
   return data;
 }
+
+export async function getMovieShowTimesForDate(id, date) {
+  const showTimes = await fetch(
+    "http://localhost:8080/mxmovies/v1/movies/" +
+      id +
+      "/showtimes?showdate=" +
+      date
+  );
+  const data = await showTimes.json();
+  if (!data) {
+    throw new Error("Failed to fetch data");
+  }
+  console.log(data);
+  return data;
+}
