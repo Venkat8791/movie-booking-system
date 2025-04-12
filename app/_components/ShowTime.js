@@ -12,9 +12,14 @@ function ShowTime({ show }) {
   const daytime = parseInt(show.showTimeName.split(":")[0]);
   return (
     <button
-      className="px-4 py-2 sm:px-8 sm:py-4 text-sm font-medium shadow-md transition-colors duration-200 
-                   bg-[var(--accent-light)] text-white hover:bg-[var(--accent-dark)]
-                   dark:bg-[var(--accent-light)] dark:text-black dark:hover:bg-[var(--accent)]"
+      className={`px-4 py-2 sm:px-8 sm:py-4 text-sm font-medium shadow-md rounded
+                  ${
+                    show.availableSeats >= 0.8 * show.numOfSeats
+                      ? "bg-green-100 text-green-500 border-green-500"
+                      : show.availableSeats >= 0.5 * show.numOfSeats
+                      ? "bg-yellow-100 text-yellow-500 border-yellow-500"
+                      : "bg-red-100 text-red-500 border-red-500"
+                  }`}
       onClick={() => handleShowTimeClick(show.showTimeId)}
     >
       {show.showTimeName} {daytime < 12 ? "AM" : "PM"}
