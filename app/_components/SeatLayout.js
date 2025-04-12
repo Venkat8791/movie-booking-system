@@ -1,24 +1,40 @@
 import React from "react";
+import Seat from "./Seat";
 
-function SeatLayout({ seats }) {
+function SeatLayout({ seats, selectedSeats, setSelectedSeats }) {
+  const handleSeatClick = (seat) => {
+    setSelectedSeats((prev) => {
+      const alreadySelected = prev.find((s) => s.seatId === seat.seatId);
+      if (alreadySelected) {
+        return prev.filter((s) => s.seatId !== seat.seatId);
+      } else {
+        return [...prev, seat];
+      }
+    });
+  };
+
+  const isSeatSelected = (seat) => {
+    for (const selectedSeat of selectedSeats) {
+      if (selectedSeat.seatId === seat.seatId) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto md:min-w-2/3">
       <div className="min-w-max">
         {Object.entries(seats).map(([row, seats]) => (
-          <div key={row} className="flex gap-2 items-center mb-2">
+          <div className="flex gap-2 items-center mb-2" key={row}>
             <span className="w-6">{row}</span>
             {seats.map((seat) => (
-              <button
+              <Seat
+                seat={seat}
                 key={seat.seatId}
-                className={`min-w-[32px] min-h-[32px] border text-xs rounded-sm ${
-                  seat.status === "BOOKED"
-                    ? "bg-gray-200 text-white"
-                    : "border-green-400 text-green-400 hover:bg-green-500 hover:text-white"
-                }`}
-                disabled={seat.status === "Booked"}
-              >
-                {seat.columnNumber}
-              </button>
+                handleSeatClick={handleSeatClick}
+                isSelected={isSeatSelected(seat)}
+              />
             ))}
           </div>
         ))}

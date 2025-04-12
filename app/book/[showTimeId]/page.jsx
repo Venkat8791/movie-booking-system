@@ -1,4 +1,7 @@
+import BookingSummary from "@/app/_components/BookingSummary";
 import SeatLayout from "@/app/_components/SeatLayout";
+import SeatLayoutBookingSummary from "@/app/_components/SeatLayoutBookingSummary";
+import { SelectedSeatsProvider } from "@/app/_context/SelectedSeatsProvider";
 import { getSeatsForShowTime } from "@/app/_lib/showtime-data-service";
 
 const groupSeatsByRow = (seats) => {
@@ -26,7 +29,9 @@ export default async function Page({ params }) {
         </p>
       </div>
 
-      <SeatLayout seats={groupedSeats} />
+      <SelectedSeatsProvider>
+        <SeatLayoutBookingSummary groupedSeats={groupedSeats} />
+      </SelectedSeatsProvider>
     </div>
   );
 }
