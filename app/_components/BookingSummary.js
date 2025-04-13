@@ -1,10 +1,49 @@
-import React from "react";
+"use client";
 import SeatInfo from "./SeatInfo";
 import TicketInfo from "./TicketInfo";
 import PaymentInfo from "./PaymentInfo";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-function BookingSummary({ selectedSeats }) {
+function BookingSummary({ selectedSeats, showTimeId }) {
+  const router = useRouter();
+  const handleBooking = async (e) => {
+    e.preventDefault(); // prevent default form submit
+    const userId = 1;
+    const bookingRequest = {
+      userId,
+      showTimeId,
+      seatIds: selectedSeats.map((seat) => seat.seatId),
+      totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:8080/mxmovies/v1/bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST",
+          },
+          body: JSON.stringify(bookingRequest),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        router.push("/bookings/" + data.bookingId);
+        console.log("Booking Successful:", data);
+      } else {
+        // handle error response
+        console.error("Booking failed");
+      }
+    } catch (error) {
+      console.error("Booking error:", error);
+    }
+  };
+
   const premiumSeats = selectedSeats.filter(
     (seat) => seat.seatType === "PREMIUM"
   );
@@ -50,9 +89,14 @@ function BookingSummary({ selectedSeats }) {
 
       {selectedSeats.length > 0 && <PaymentInfo totalAmount={totalAmount} />}
       {selectedSeats.length > 0 && (
-        <button className="hidden md:block text-white px-4 py-2 rounded mt-2 w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)]">
-          Proceed
-        </button>
+        <form onSubmit={handleBooking}>
+          <button
+            className="hidden md:block text-white px-4 py-2 rounded mt-2 w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)]"
+            type="submit"
+          >
+            Proceed
+          </button>
+        </form>
       )}
 
       {selectedSeats.length > 0 && (

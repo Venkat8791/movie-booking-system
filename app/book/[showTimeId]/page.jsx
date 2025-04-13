@@ -30,7 +30,10 @@ export default async function Page({ params }) {
       </div>
 
       <SelectedSeatsProvider>
-        <SeatLayoutBookingSummary groupedSeats={groupedSeats} />
+        <SeatLayoutBookingSummary
+          groupedSeats={groupedSeats}
+          showTimeId={showTimeId}
+        />
       </SelectedSeatsProvider>
     </div>
   );
