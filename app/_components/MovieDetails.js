@@ -19,7 +19,7 @@ function MovieDetails({ movie }) {
         <div className="sm:flex gap-2">
           <p className="text-gray-600 italic">{duration}</p>
           <p className="text-gray-600 italic">{genre}</p>
-          <p className="text-gray-600 italic">{language}</p>
+          <p className="text-gray-600 italic">{movie.languages.join(",")}</p>
         </div>
         <p className="text-yellow-400 font-bold mt-1">⭐ {rating}</p>
         <p className="text-black-600">

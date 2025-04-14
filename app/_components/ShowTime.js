@@ -15,7 +15,7 @@ function ShowTime({ show }) {
       className={`px-4 py-2 sm:px-8 sm:py-4 text-sm font-medium shadow-md rounded
                   ${
                     show.availableSeats >= 0.8 * show.numOfSeats
-                      ? "bg-green-100 text-green-500 border-green-500"
+                      ? "bg-green-50 text-green-500 border-1"
                       : show.availableSeats >= 0.5 * show.numOfSeats
                       ? "bg-yellow-100 text-yellow-500 border-yellow-500"
                       : "bg-red-100 text-red-500 border-red-500"

@@ -64,6 +64,7 @@ function BookingSummary({ selectedSeats, showTimeId }) {
           <Image
             src="/SelectSeats.png"
             alt="Select Seats"
+            className="[@media(max-height:400px)]:hidden"
             width={100}
             height={100}
           />

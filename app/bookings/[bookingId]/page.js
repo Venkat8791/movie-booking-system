@@ -20,7 +20,7 @@ export default async function page({ params }) {
             <Image
               alt={bookingDetails?.movie?.title}
               src={bookingDetails?.movie?.posterUrl}
-              width={100}
+              width={150}
               height={400}
               className="object-cover rounded"
             />
@@ -31,21 +31,21 @@ export default async function page({ params }) {
                 {bookingDetails?.movie?.title}
               </p>
               <p className="text-gray-600 mt-1">
-                {bookingDetails?.movie?.language}
+                {bookingDetails?.movie?.duration}m. {bookingDetails?.language}
               </p>
               <p className="text-gray-600 mt-1">
-                {bookingDetails?.showDetailsDTO?.showTimeName}{" "}
+                {bookingDetails?.showDetails?.showTimeName}{" "}
                 {daytime < 12 ? "AM" : "PM"}
               </p>
               <p className="text-sm text-gray-500">
-                {bookingDetails?.showDetailsDTO?.cinemaName},{" "}
-                {bookingDetails?.showDetailsDTO?.location}
+                {bookingDetails?.showDetails?.cinemaName},{" "}
+                {bookingDetails?.showDetails?.location}
               </p>
             </div>
 
             <div className="mt-4">
               <p className="text-lg uppercase font-semibold">
-                {bookingDetails?.showDetailsDTO?.screenName}
+                {bookingDetails?.showDetails?.screenName}
               </p>
               <p className="font-semibold">Seats:</p>
               <div className="flex flex-wrap gap-2 mt-2">
