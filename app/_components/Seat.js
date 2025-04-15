@@ -3,6 +3,7 @@ import React from "react";
 function Seat({ seat, handleSeatClick, isSelected }) {
   return (
     <button
+      role="button"
       className={`min-w-[32px] min-h-[32px] border text-xs rounded-sm ${
         seat.status === "BOOKED"
           ? "bg-gray-200 text-white cursor-not-allowed"

@@ -22,11 +22,7 @@ function MovieDetails({ movie }) {
           <p className="text-gray-600 italic">{movie.languages.join(",")}</p>
         </div>
         <p className="text-yellow-400 font-bold mt-1">⭐ {rating}</p>
-        <p className="text-black-600">
-          Cooper and a team of astronauts travel through the wormhole in search
-          of a habitable planet, facing perilous situations and the complexities
-          of time and space travel.
-        </p>
+        <p className="text-black-600">{movie.description}</p>
       </div>
     </div>
   );

@@ -17,8 +17,8 @@ function ShowTime({ show }) {
                     show.availableSeats >= 0.8 * show.numOfSeats
                       ? "bg-green-50 text-green-500 border-1"
                       : show.availableSeats >= 0.5 * show.numOfSeats
-                      ? "bg-yellow-100 text-yellow-500 border-yellow-500"
-                      : "bg-red-100 text-red-500 border-red-500"
+                      ? "bg-yellow-50 text-yellow-500 border-1"
+                      : "bg-red-50 text-red-500 border-1"
                   }`}
       onClick={() => handleShowTimeClick(show.showTimeId)}
     >

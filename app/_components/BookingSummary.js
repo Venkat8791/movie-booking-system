@@ -19,7 +19,7 @@ function BookingSummary({ selectedSeats, showTimeId }) {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/mxmovies/v1/bookings",
+        "http://192.168.0.130:8080/mxmovies/v1/bookings",
         {
           method: "POST",
           headers: {
@@ -35,6 +35,7 @@ function BookingSummary({ selectedSeats, showTimeId }) {
         const data = await response.json();
         router.push("/bookings/" + data.bookingId);
         console.log("Booking Successful:", data);
+        router.refresh();
       } else {
         // handle error response
         console.error("Booking failed");
@@ -55,7 +56,7 @@ function BookingSummary({ selectedSeats, showTimeId }) {
   const totalAmount = selectedSeats.reduce((acc, seat) => acc + seat.price, 0);
 
   return (
-    <div className="w-full p-4 md:w-1/3 shadow-lg max-h-[100vh]">
+    <div className="w-full p-4 md:w-1/3 shadow-lg md:max-h-[100vh]">
       <p className="hidden md:block border-b-1 text-xl font-semibold text-gray-600 uppercase">
         Bookings Summary
       </p>
@@ -101,12 +102,14 @@ function BookingSummary({ selectedSeats, showTimeId }) {
       )}
 
       {selectedSeats.length > 0 && (
-        <button className="block md:hidden text-white px-4 py-2 rounded mt-2 w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)]">
-          <div className="flex justify-between">
-            <p>{selectedSeats.length} tickets</p>
-            <p>${totalAmount}</p>
-          </div>
-        </button>
+        <form onSubmit={handleBooking}>
+          <button className="fixed bottom-2 left-0 z-50  mx-auto block md:hidden text-white px-4 py-2 rounded  w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)]">
+            <div className="flex justify-between">
+              <p>{selectedSeats.length} tickets</p>
+              <p>${totalAmount}</p>
+            </div>
+          </button>
+        </form>
       )}
     </div>
   );

@@ -17,7 +17,7 @@ export default async function Page({ params, searchParams }) {
   const date =
     (await searchParams?.date) || new Date().toISOString().split("T")[0];
   console.log(date);
-  const showTimes = await getMovieShowTimesForDate(movieId, date);
+  const cinemas = await getMovieShowTimesForDate(movieId, date);
   if (!movie) {
     return <div>Movie not found</div>;
   }
@@ -27,7 +27,7 @@ export default async function Page({ params, searchParams }) {
       <MovieDetails movie={movie} />
 
       {/* show time */}
-      <ShowTimesSection date={date} showTimes={showTimes} />
+      <ShowTimesSection date={date} showTimes={cinemas.showTimes} />
     </>
   );
 }
