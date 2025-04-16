@@ -13,7 +13,7 @@ const getNext5days = Array.from({ length: 5 }, (_, i) => {
   return date;
 });
 
-function ShowTimesSection({ date, showTimes }) {
+function ShowTimesSection({ date, showTimes, movieId }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedDate =
@@ -36,9 +36,15 @@ function ShowTimesSection({ date, showTimes }) {
         onDateChange={onDateChange}
       />
       {showTimes?.length == 0 ? (
-        <p>oops 🙁 , No Shows Available.</p>
+        <p className="p-4 bg-red-200 flex justify-center mx-auto text-gray-500 rounded">
+          OOPS 🙁 , No Shows Available.
+        </p>
       ) : (
-        <ShowCinemasSection cinemas={showTimes} />
+        <ShowCinemasSection
+          cinemas={showTimes}
+          showDate={date}
+          movieId={movieId}
+        />
       )}
     </div>
   );

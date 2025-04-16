@@ -2,23 +2,25 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-function ShowTime({ show }) {
+function ShowTime({ show, cinemaId, showDate, movieId }) {
   const router = useRouter();
-
+  console.log("showDate" + showDate);
   const handleShowTimeClick = (showTimeId) => {
-    router.push(`/book/${showTimeId}`);
+    router.push(
+      `/book/${showTimeId}?showDate=${showDate}&cinemaId=${cinemaId}&movieId=${movieId}`
+    );
   };
 
   const daytime = parseInt(show.showTimeName.split(":")[0]);
   return (
     <button
-      className={`px-4 py-2 sm:px-8 sm:py-4 text-sm font-medium shadow-md rounded
+      className={`px-2 py-1 sm:px-4 sm:py-2 text-sm font-medium shadow-md rounded border-gray-400
                   ${
                     show.availableSeats >= 0.8 * show.numOfSeats
-                      ? "bg-green-50 text-green-500 border-1"
+                      ? " text-green-600 border-1 "
                       : show.availableSeats >= 0.5 * show.numOfSeats
-                      ? "bg-yellow-50 text-yellow-500 border-1"
-                      : "bg-red-50 text-red-500 border-1"
+                      ? " text-yellow-600 border-1"
+                      : " text-red-600 border-1"
                   }`}
       onClick={() => handleShowTimeClick(show.showTimeId)}
     >

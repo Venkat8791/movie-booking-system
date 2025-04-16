@@ -27,7 +27,11 @@ export default async function Page({ params, searchParams }) {
       <MovieDetails movie={movie} />
 
       {/* show time */}
-      <ShowTimesSection date={date} showTimes={cinemas.showTimes} />
+      <ShowTimesSection
+        date={date}
+        showTimes={cinemas.showTimes}
+        movieId={movieId}
+      />
     </>
   );
 }
