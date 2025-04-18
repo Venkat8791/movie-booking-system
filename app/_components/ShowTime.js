@@ -4,10 +4,11 @@ import React from "react";
 
 function ShowTime({ show, cinemaId, showDate, movieId }) {
   const router = useRouter();
-  console.log("showDate" + showDate);
   const handleShowTimeClick = (showTimeId) => {
-    router.push(
-      `/book/${showTimeId}?showDate=${showDate}&cinemaId=${cinemaId}&movieId=${movieId}`
+    router.replace(
+      `/book/${showTimeId}?showDate=${showDate}&cinemaId=${cinemaId}&movieId=${movieId}`,
+      undefined,
+      { shallow: true }
     );
   };
 

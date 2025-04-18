@@ -4,7 +4,7 @@ export async function getMovies() {
   if (!data) {
     throw new Error("Failed to fetch data");
   }
-  console.log(data);
+
   return data;
 }
 
@@ -14,7 +14,7 @@ export async function getMovie(id) {
   if (!data) {
     throw new Error("Failed to fetch data");
   }
-  console.log(data);
+
   return data;
 }
 
@@ -29,6 +29,6 @@ export async function getMovieShowTimesForDate(id, date) {
   if (!data) {
     throw new Error("Failed to fetch data");
   }
-  console.log(data);
+
   return data;
 }

@@ -22,7 +22,6 @@ const groupSeatsByRow = (seats) => {
 export default async function Page({ params, searchParams }) {
   const { showTimeId } = await params;
   const { movieId, cinemaId, showDate } = await searchParams;
-  console.log(movieId, cinemaId, showDate);
   const [showTimeInfo, otherShowTimes] = await Promise.all([
     getSeatsForShowTime(showTimeId),
     getOtherShowTimes(movieId, cinemaId, showDate),

@@ -34,7 +34,6 @@ function BookingSummary({ selectedSeats, showTimeId }) {
       if (response.ok) {
         const data = await response.json();
         router.push("/bookings/" + data.bookingId);
-        console.log("Booking Successful:", data);
         router.refresh();
       } else {
         // handle error response

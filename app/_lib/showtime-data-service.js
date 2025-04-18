@@ -6,7 +6,7 @@ export async function getSeatsForShowTime(id) {
   if (!data) {
     throw new Error("Failed to fetch data");
   }
-  console.log(data);
+
   return data;
 }
 
@@ -24,7 +24,5 @@ export async function getOtherShowTimes(movieId, cinemaId, showDate) {
   if (!data) {
     throw new Error("Failed to fetch data");
   }
-  console.log("data is ");
-  console.log(data);
   return data;
 }

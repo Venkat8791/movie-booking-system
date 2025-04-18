@@ -2,7 +2,6 @@ import MovieDetails from "@/app/_components/MovieDetails";
 import ShowTimesSection from "@/app/_components/ShowTimesSection";
 import {
   getMovie,
-  getMovieShowTimes,
   getMovieShowTimesForDate,
 } from "@/app/_lib/movie-data-service";
 import React from "react";
@@ -16,7 +15,7 @@ export default async function Page({ params, searchParams }) {
   const movie = await getMovie(movieId);
   const date =
     (await searchParams?.date) || new Date().toISOString().split("T")[0];
-  console.log(date);
+  const languageFilter = searchParams?.language || "all";
   const cinemas = await getMovieShowTimesForDate(movieId, date);
   if (!movie) {
     return <div>Movie not found</div>;
@@ -31,6 +30,7 @@ export default async function Page({ params, searchParams }) {
         date={date}
         showTimes={cinemas.showTimes}
         movieId={movieId}
+        languageFilter={languageFilter}
       />
     </>
   );

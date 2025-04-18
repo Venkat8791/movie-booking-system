@@ -20,9 +20,10 @@ function MovieHeaderInfo({ showTimeInfo, movieId }) {
   const daytime = parseInt(showTimeInfo.showTimeName.split(":")[0]);
 
   const handleBackNavigation = () => {
-    router.push("/movies/" + movieId);
+    router.replace("/movies/" + movieId);
     router.refresh();
   };
+
   return (
     <div className=" flex gap-4 mb-4 shadow-sm rounded p-4">
       <div className="flex flex-col items-center justify-center ">

@@ -6,6 +6,6 @@ export async function getBooking(bookingId) {
   if (!data) {
     throw new Error("Failed to fetch booking");
   }
-  console.log(data);
+
   return data;
 }
