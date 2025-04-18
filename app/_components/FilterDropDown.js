@@ -1,10 +1,13 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import DesktopFilter from "./DesktopFilter";
+import MobileFilter from "./MobileFilter";
 
 const FilterDropDown = ({ options, label }) => {
   const searchParams = useSearchParams();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDesktopFilterOpen, setIsDesktopFilterOpen] = useState(false);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const router = useRouter();
 
@@ -12,34 +15,37 @@ const FilterDropDown = ({ options, label }) => {
     setSelected(option);
     const params = new URLSearchParams(searchParams?.toString() || "");
 
-    params.set(label, option.toString());
+    params.set(label.toLowerCase(), option.toString());
     router.replace(`?${params.toString()}`, undefined, { shallow: true });
-    setIsOpen(false); // close dropdown after selection
+    setIsDesktopFilterOpen(false);
+    setIsMobileFilterOpen(false); // close dropdown after selection
   };
 
   return (
-    <div className="relative inline-block text-left  ">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="px-4 py-2 bg-white rounded-md shadow-sm hover:bg-gray-50"
-      >
-        {selected ? `${label}: ${selected}` : `${label}`}
-      </button>
+    <>
+      <div className="block md:hidden">
+        <MobileFilter
+          options={options}
+          label={label}
+          isMobileFilterOpen={isMobileFilterOpen}
+          handleSelect={handleSelect}
+          setIsMobileFilterOpen={setIsMobileFilterOpen}
+          selected={selected}
+        />
+      </div>
 
-      {isOpen && (
-        <div className="absolute z-10 mt-2 w-48 bg-white  rounded-md shadow-lg">
-          {options.map((option) => (
-            <button
-              key={option}
-              onClick={() => handleSelect(option)}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+      {/* Sidebar Filter for Desktop */}
+      <div className="hidden md:block">
+        <DesktopFilter
+          options={options}
+          label={label}
+          isDesktopFilterOpen={isDesktopFilterOpen}
+          handleSelect={handleSelect}
+          setIsDesktopFilterOpen={setIsDesktopFilterOpen}
+          selected={selected}
+        />
+      </div>
+    </>
   );
 };
 

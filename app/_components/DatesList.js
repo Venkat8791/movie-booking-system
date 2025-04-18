@@ -35,7 +35,7 @@ function DatesList({ dates, selectedDate, onDateChange }) {
       <div className="flex flex-col md:flex-row gap-2 items-center">
         <FilterDropDown
           options={["All", "English", "Telugu", "Hindi"]}
-          label={"language"}
+          label={"Language"}
         />
       </div>
     </div>
