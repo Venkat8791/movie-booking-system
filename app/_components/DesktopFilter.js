@@ -30,7 +30,7 @@ function DesktopFilter({
             {options.map((option) => (
               <button
                 key={option}
-                className={`text-left transition rounded-md  ${
+                className={`text-left transition rounded-md  flex justify-center ${
                   selected === option
                     ? "bg-amber-500 text-white"
                     : "bg-gray-50 hover:bg-gray-100"
