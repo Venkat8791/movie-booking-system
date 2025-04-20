@@ -16,6 +16,7 @@ function BookingSummary({ selectedSeats, showTimeId }) {
       seatIds: selectedSeats.map((seat) => seat.seatId),
       totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
     };
+    console.log(bookingRequest);
 
     try {
       const response = await fetch(

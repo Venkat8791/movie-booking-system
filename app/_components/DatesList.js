@@ -12,7 +12,7 @@ const formatDate = (date) => {
 function DatesList({ dates, selectedDate, onDateChange }) {
   return (
     <div className="flex flex-col gap-2 md:flex-row justify-between p-2 border-t-1 border-gray-400 mt-4 shadow-md">
-      <div className="flex flex-grow flex-wrap gap-1 sm:gap-6 items-center">
+      <div className="flex flex-grow flex-wrap gap-1 md:gap-2 items-center">
         {dates.map((date, idx) => (
           <button
             key={idx}

@@ -15,7 +15,7 @@ function SeatInfo({ premiumSeats, vipSeats, regularSeats }) {
                 className="flex justify-center font-bold text-sm rounded  bg-purple-500"
               >
                 <span className="px-2 py-1 border rounded text-white">
-                  {seat.rowNumber + seat.columnNumber}
+                  {seat.label}
                 </span>
               </div>
             ))}
@@ -33,7 +33,7 @@ function SeatInfo({ premiumSeats, vipSeats, regularSeats }) {
                 className="flex justify-center font-bold text-sm rounded  bg-yellow-500"
               >
                 <span className="px-2 py-1 border rounded text-white">
-                  {seat.rowNumber + seat.columnNumber}
+                  {seat.label}
                 </span>
               </div>
             ))}
@@ -52,7 +52,7 @@ function SeatInfo({ premiumSeats, vipSeats, regularSeats }) {
                 className="flex justify-center font-bold text-sm rounded  bg-blue-500"
               >
                 <span className="px-2 py-1 border rounded text-white">
-                  {seat.rowNumber + seat.columnNumber}
+                  {seat.label}
                 </span>
               </div>
             ))}
