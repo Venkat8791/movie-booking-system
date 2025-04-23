@@ -35,6 +35,7 @@ const config = {
         muted: "var(--muted)",
         disabled: "var(--disabled)",
         error: "var(--error)",
+        success: "var(--success)",
       },
     },
   },

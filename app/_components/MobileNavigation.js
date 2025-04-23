@@ -1,9 +1,14 @@
+"use client";
 import { X } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import LoginButton from "./LoginButton";
+import { useAuth } from "../_context/AuthProvider";
+import UserComponent from "./UserComponent";
 
 function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
+  const { auth } = useAuth();
+  console.log(auth);
   return (
     <aside
       className={`lg:hidden fixed top-0 right-0 w-64 h-full flex flex-col bg-white z-50  p-6 shadow-md transition-transform ${
@@ -28,7 +33,7 @@ function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
           </li>
         ))}
 
-        <LoginButton />
+        {auth.isAuthenticated ? <UserComponent /> : <LoginButton />}
       </ul>
     </aside>
   );

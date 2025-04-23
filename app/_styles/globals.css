@@ -14,6 +14,7 @@
   --muted: #f4f4f5;
   --disabled: #a1a1aa;
   --error: #dc2626;
+  --success: rgb(30, 168, 60);
 }
 
 .dark {

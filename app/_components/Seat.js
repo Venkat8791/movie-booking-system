@@ -2,21 +2,21 @@
 
 function Seat({ seat, handleSeatClick, isSelected, isBooked }) {
   if (seat.gap === true) {
-    return <div className="min-w-[32px] min-h-[32px] "></div>;
+    return <div className="w-7 h-7"></div>;
   }
 
   return (
     <button
       role="button"
-      className={`min-w-[24px] min-h-[24px] border text-[12px] ${
+      className={`w-7 h-7 border text-[12px] ${
         isBooked
           ? "bg-gray-200 text-white cursor-not-allowed"
-          : "border-green-400 text-green-400 hover:bg-green-500 hover:text-white"
+          : "border-[#1ea83c] text-[#1ea83c] hover:bg-green-500 hover:text-white"
       } ${isSelected === true ? "bg-green-500 text-white" : ""}`}
       disabled={seat.status === "BOOKED"}
       onClick={() => handleSeatClick(seat)}
     >
-      {seat.label}
+      {seat.label.substring(1, 3)}
     </button>
   );
 }

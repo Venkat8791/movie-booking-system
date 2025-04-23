@@ -20,7 +20,7 @@ function BookingSummary({ selectedSeats, showTimeId }) {
 
     try {
       const response = await fetch(
-        "http://192.168.0.130:8080/mxmovies/v1/bookings",
+        "http://localhost:8080/mxmovies/v1/bookings",
         {
           method: "POST",
           headers: {

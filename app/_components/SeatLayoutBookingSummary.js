@@ -13,7 +13,9 @@ function SeatLayoutBookingSummary({ seatLayout, showTimeId, bookedSeats }) {
         seatLayout={seatLayout}
         bookedSeats={bookedSeats}
       />
-      <BookingSummary selectedSeats={selectedSeats} showTimeId={showTimeId} />
+      {selectedSeats.length > 0 && (
+        <BookingSummary selectedSeats={selectedSeats} showTimeId={showTimeId} />
+      )}
     </div>
   );
 }

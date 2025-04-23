@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
 import LoginButton from "./LoginButton";
+import { useAuth } from "../_context/AuthProvider";
+import UserComponent from "./UserComponent";
 
 export default function DesktopNavigation({ navLinks }) {
+  const { auth } = useAuth();
   return (
     // desktop navigation
     <nav className="hidden lg:block">
@@ -19,7 +22,7 @@ export default function DesktopNavigation({ navLinks }) {
           </li>
         ))}
 
-        <LoginButton />
+        {auth.isAuthenticated ? <UserComponent /> : <LoginButton />}
       </ul>
     </nav>
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import Seat from "./Seat";
 import SeatLegend from "./SeatLegend";
-import { CloudCog } from "lucide-react";
 
 function SeatLayout({
   seatLayout,
@@ -46,10 +45,10 @@ function SeatLayout({
                 "Rs. " + section.price + " " + section.sectionName.toUpperCase()
               }`}
             </p>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               {section.rows.map((row) => (
-                <div key={row.label} className="flex gap-1 items-center">
-                  <p className="text-gray-500 text-sm ">{row.label}</p>
+                <div key={row.label} className="flex gap-2 items-center">
+                  <p className="text-gray-500 text-sm w-7 h-7">{row.label}</p>
                   {row.seats.map((seat) => (
                     <Seat
                       key={seat.seatId}
