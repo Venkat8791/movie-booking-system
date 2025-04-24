@@ -2,10 +2,11 @@
 import Link from "next/link";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../_context/AuthProvider";
-import UserComponent from "./UserComponent";
+
+import UserMenu from "./UserMenu";
 
 export default function DesktopNavigation({ navLinks }) {
-  const { auth } = useAuth();
+  const { auth, loading } = useAuth();
   return (
     // desktop navigation
     <nav className="hidden lg:block">
@@ -21,8 +22,15 @@ export default function DesktopNavigation({ navLinks }) {
             </Link>
           </li>
         ))}
-
-        {auth.isAuthenticated ? <UserComponent /> : <LoginButton />}
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <div className="w-6 h-6 border-4 border-t-transparent border-gray-500 rounded-full animate-spin"></div>
+          </div>
+        ) : auth.isAuthenticated ? (
+          <UserMenu />
+        ) : (
+          <LoginButton />
+        )}
       </ul>
     </nav>
   );

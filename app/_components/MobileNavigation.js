@@ -5,9 +5,10 @@ import React from "react";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../_context/AuthProvider";
 import UserComponent from "./UserComponent";
+import UserMenu from "./UserMenu";
 
 function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
-  const { auth } = useAuth();
+  const { auth, loading } = useAuth();
   console.log(auth);
   return (
     <aside
@@ -32,8 +33,15 @@ function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
             </Link>
           </li>
         ))}
-
-        {auth.isAuthenticated ? <UserComponent /> : <LoginButton />}
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <div className="w-6 h-6 border-4 border-t-transparent border-gray-500 rounded-full animate-spin"></div>
+          </div>
+        ) : auth.isAuthenticated ? (
+          <UserMenu />
+        ) : (
+          <LoginButton />
+        )}
       </ul>
     </aside>
   );

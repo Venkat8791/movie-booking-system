@@ -1,11 +1,5 @@
 "use client";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -18,7 +12,7 @@ import "swiper/css/scrollbar";
 function MovieCarousel({ movies }) {
   return (
     <div className="">
-      <h2 className="text-xl font-bold mb-4">🎬 Now Playing</h2>
+      <p className="text-xl font-bold mb-4">🎬 Now Playing</p>
       <div className="w-full">
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -35,7 +29,7 @@ function MovieCarousel({ movies }) {
             <SwiperSlide key={movie.id}>
               <div className="w-full h-full p-2 flex text-white  md:bg-gradient-to-l from-[#f59e0b] to-gray-800">
                 {/* Poster on the Left */}
-                <div className="w-full md:w-1/2 h-full flex justify-center items-center">
+                <div className="w-full md:w-1/2 h-full ">
                   <img
                     src={movie.posterUrl}
                     alt={movie.title}

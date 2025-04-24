@@ -30,6 +30,9 @@ function OTPModal({
         toast.success("OTP Verified!");
 
         localStorage.setItem("authToken", authResponse.token);
+        localStorage.setItem("userId", authResponse.userId);
+        localStorage.setItem("userName", authResponse.userName || "Guest");
+        localStorage.setItem("expiry", authResponse.expiry);
         setAuth({
           isAuthenticated: true,
           userId: authResponse.userId,

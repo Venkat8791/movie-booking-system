@@ -18,7 +18,7 @@ function AuthModal({
 }) {
   const handleContinue = async () => {
     try {
-      const success = await sendOtp(mobileNumber); // your API call
+      const success = await sendOtp(mobileNumber);
 
       if (success) {
         setCurrentModal("otp");
@@ -32,11 +32,21 @@ function AuthModal({
     }
   };
 
-  const isValidPhoneOrEmail = (input) => {
-    return true;
+  const isValidPhone = (phoneNumber) => {
+    const mobileRegex = /^[6-9]\d{9}$/;
+    return mobileRegex.test(phoneNumber);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (
+      !mobileNumber ||
+      mobileNumber.trim().length === 0 ||
+      !isValidPhone(mobileNumber)
+    ) {
+      toast.error("Please enter a valid mobile number.");
+      return;
+    }
 
     handleContinue();
   };
@@ -68,16 +78,22 @@ function AuthModal({
           >
             <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 shadow-xl transition-all">
               <DialogTitle className="text-lg font-bold">
-                Sign In / Sign Up
+                Login or Signup
               </DialogTitle>
               <form className="mt-4" onSubmit={handleSubmit}>
                 {/* Add your form components here */}
                 <input
                   type="text"
-                  placeholder="Enter mobile or email"
-                  className="w-full p-2 border rounded"
+                  placeholder="Enter mobile"
+                  className="w-full p-2 border rounded mb-1"
                   onChange={(e) => setMobileNumber(e.target.value)}
                 />
+
+                <p className="text-sm font-normal">
+                  By continuing, you agree to our{" "}
+                  <span className="text-[var(--accent)]">Terms of Use</span> and{" "}
+                  <span className="text-[var(--accent)]">Privacy Policy</span>.
+                </p>
                 <button
                   type="submit"
                   className="mt-4 w-full bg-[var(--accent)] text-white p-2 rounded hover:bg-[var(--accent-hover)]"

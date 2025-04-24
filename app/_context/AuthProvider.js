@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -10,9 +10,24 @@ const AuthProvider = ({ children }) => {
     token: null,
     expiry: null,
   });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+    if (storedToken) {
+      setAuth({
+        isAuthenticated: true,
+        userId: localStorage.getItem("userId"),
+        userName: localStorage.getItem("userName"),
+        token: storedToken,
+        expiry: localStorage.getItem("expiry"),
+      });
+    }
+    setLoading(false);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, setAuth, loading }}>
       {children}
     </AuthContext.Provider>
   );
