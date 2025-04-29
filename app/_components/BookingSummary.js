@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 
 function BookingSummary({ selectedSeats, showTimeId }) {
   const router = useRouter();
+  const userId = localStorage.getItem("userId");
   const handleBooking = async (e) => {
     e.preventDefault(); // prevent default form submit
-    const userId = 1;
     const bookingRequest = {
       userId,
       showTimeId,

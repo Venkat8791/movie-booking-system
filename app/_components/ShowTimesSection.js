@@ -26,7 +26,7 @@ function filterByLanguage(data, selectedLanguage) {
     .filter((showTime) => showTime !== null);
 }
 
-function ShowTimesSection({ date, showTimes, movieId, languageFilter }) {
+function ShowTimesSection({ date, showTimes, movieId, languageFilter, error }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedDate =
@@ -37,23 +37,26 @@ function ShowTimesSection({ date, showTimes, movieId, languageFilter }) {
 
   const onDateChange = (date) => {
     const formatted = date.toISOString().split("T")[0];
-    const current = new URLSearchParams(searchParams.toString());
-    current.set("date", formatted);
-    router.replace(`?${current.toString()}`, undefined, { shallow: true });
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("date", formatted);
+    params.delete("language");
+    router.replace(`?${params.toString()}`, undefined, { shallow: true });
   };
 
   const dates = useMemo(() => getNext5days, []);
+
   return (
     <div>
       <DatesList
+        error={error}
         dates={dates}
         selectedDate={selectedDate}
         onDateChange={onDateChange}
       />
-      {showTimes?.length == 0 ? (
-        <p className="p-4 bg-red-200 flex justify-center mx-auto text-gray-500 rounded">
-          OOPS 🙁 , No Shows Available.
-        </p>
+      {error ? (
+        <div className="flex flex-col items-center justify-center h-full p-4 bg-red-400">
+          <p className="font-semibold ">OOPS 🙁 , No Shows Available.</p>
+        </div>
       ) : (
         <ShowCinemasSection
           cinemas={showTimes}

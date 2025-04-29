@@ -10,6 +10,7 @@ function UserMenu() {
   const { setAuth } = useAuth();
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
     setAuth({
       isAuthenticated: false,
       userId: null,

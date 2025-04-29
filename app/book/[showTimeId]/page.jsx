@@ -18,34 +18,48 @@ import {
 //   }, {});
 // };
 
-const bookedSeatsSet = (seats) => {
-  const bookedSeats = new Set();
-  seats.forEach((seat) => {
-    bookedSeats.add(seat.seatId);
-  });
-  return bookedSeats;
-};
-
 export default async function Page({ params, searchParams }) {
   const { showTimeId } = await params;
   const { movieId, cinemaId, showDate } = await searchParams;
+  let bookedSeatsInfo = null;
+  let seatLayout = null;
+  let otherShowTimes = null;
+  let bookedSeatsInfoError = null;
+  let seatLayoutError = null;
+  let otherShowTimesError = null;
 
-  const bookedSeatsInfo = await getSeatsBookedForShowTime(showTimeId);
-  const seatLayout = await getSeatLayout(showTimeId);
-  const otherShowTimes = await getOtherShowTimes(movieId, cinemaId, showDate);
+  try {
+    bookedSeatsInfo = await getSeatsBookedForShowTime(showTimeId);
+  } catch (error) {
+    bookedSeatsInfoError = error;
+  }
 
-  // const groupedSeats = groupSeatsByRow(showTimeInfo.seats);
+  try {
+    seatLayout = await getSeatLayout(showTimeId);
+  } catch (error) {
+    seatLayoutError = error;
+  }
+  try {
+    otherShowTimes = await getOtherShowTimes(movieId, cinemaId, showDate);
+  } catch (error) {
+    otherShowTimesError = error;
+  }
 
   return (
     <div className="flex flex-col gap-2">
-      <MovieHeaderInfo showTimeInfo={bookedSeatsInfo} movieId={movieId} />
-      <ShowTimesList showTimes={otherShowTimes} />
+      <MovieHeaderInfo
+        showTimeInfo={bookedSeatsInfo}
+        movieId={movieId}
+        error={bookedSeatsInfoError}
+      />
+      <ShowTimesList showTimes={otherShowTimes} error={otherShowTimesError} />
 
       <SelectedSeatsProvider>
         <SeatLayoutBookingSummary
-          bookedSeats={bookedSeatsSet(bookedSeatsInfo.seats)}
+          bookedSeatsInfo={bookedSeatsInfo}
           seatLayout={seatLayout}
           showTimeId={showTimeId}
+          error={seatLayoutError}
         />
       </SelectedSeatsProvider>
     </div>

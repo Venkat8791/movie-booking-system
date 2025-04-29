@@ -19,16 +19,21 @@ export async function getMovie(id) {
 }
 
 export async function getMovieShowTimesForDate(id, date) {
-  const showTimes = await fetch(
+  const response = await fetch(
     "http://localhost:8080/mxmovies/v1/movies/" +
       id +
       "/showtimes?showdate=" +
       date
   );
-  const data = await showTimes.json();
-  if (!data) {
+  if (!response.ok) {
+    console.log("Error fetching show times:", response.status);
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
+  }
+  const showTimes = await response.json();
+  if (!showTimes) {
     throw new Error("Failed to fetch data");
   }
 
-  return data;
+  return showTimes;
 }

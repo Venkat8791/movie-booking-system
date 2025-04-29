@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-function MovieHeaderInfo({ showTimeInfo, movieId }) {
+function MovieHeaderInfo({ showTimeInfo, movieId, error }) {
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
 
@@ -23,6 +23,14 @@ function MovieHeaderInfo({ showTimeInfo, movieId }) {
     router.replace("/movies/" + movieId);
     router.refresh();
   };
+
+  if (error) {
+    return (
+      <div className="flex flex-col gap-2">
+        <h1 className="text-red-500">{error.message}</h1>
+      </div>
+    );
+  }
 
   return (
     <div className=" flex gap-4 mb-4 shadow-sm rounded p-4">

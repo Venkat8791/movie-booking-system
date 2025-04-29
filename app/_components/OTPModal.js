@@ -1,5 +1,4 @@
 import {
-  CloseButton,
   Dialog,
   DialogPanel,
   DialogTitle,

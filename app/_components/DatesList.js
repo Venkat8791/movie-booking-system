@@ -9,7 +9,7 @@ const formatDate = (date) => {
   return `${day} ${week} ${month}`;
 };
 
-function DatesList({ dates, selectedDate, onDateChange }) {
+function DatesList({ dates, selectedDate, onDateChange, error }) {
   return (
     <div className="flex flex-col gap-2 md:flex-row justify-between p-2 border-t-1 border-gray-400 mt-4 shadow-md">
       <div className="flex flex-grow flex-wrap gap-1 md:gap-2 items-center">
@@ -33,10 +33,12 @@ function DatesList({ dates, selectedDate, onDateChange }) {
         ))}
       </div>
       <div className="flex flex-col md:flex-row gap-2 items-center">
-        <FilterDropDown
-          options={["All", "English", "Telugu", "Hindi"]}
-          label={"Language"}
-        />
+        {!error && (
+          <FilterDropDown
+            options={["All", "English", "Telugu", "Hindi"]}
+            label={"Language"}
+          />
+        )}
       </div>
     </div>
   );

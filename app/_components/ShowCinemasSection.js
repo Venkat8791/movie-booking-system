@@ -2,6 +2,16 @@ import React from "react";
 import ShowTime from "./ShowTime";
 
 function ShowCinemasSection({ cinemas, showDate, movieId }) {
+  if (!cinemas || cinemas.length === 0) {
+    return (
+      <div className="mt-4 p-2 bg-red-400 flex flex-col items-center mx-auto  rounded">
+        <p className="font-semibold">
+          No Shows Playing with the selected Language. Please change the
+          language
+        </p>
+      </div>
+    );
+  }
   return (
     <div>
       {cinemas.map((cinema, idx) => (

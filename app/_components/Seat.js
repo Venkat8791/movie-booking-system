@@ -10,7 +10,7 @@ function Seat({ seat, handleSeatClick, isSelected, isBooked }) {
       role="button"
       className={`w-7 h-7 border text-[12px] ${
         isBooked
-          ? "bg-gray-200 text-white cursor-not-allowed"
+          ? "bg-gray-200 border-gray-200 text-white cursor-not-allowed"
           : "border-[#1ea83c] text-[#1ea83c] hover:bg-green-500 hover:text-white"
       } ${isSelected === true ? "bg-green-500 text-white" : ""}`}
       disabled={seat.status === "BOOKED"}

@@ -11,12 +11,21 @@ export const metadata = {
 };
 
 export default async function Page({ params, searchParams }) {
-  const movieId = await params.movieId;
+  params = await params;
+  const movieId = params.movieId;
   const movie = await getMovie(movieId);
-  const date =
-    (await searchParams?.date) || new Date().toISOString().split("T")[0];
+  searchParams = await searchParams;
+  const date = searchParams?.date || new Date().toISOString().split("T")[0];
   const languageFilter = searchParams?.language || "all";
-  const cinemas = await getMovieShowTimesForDate(movieId, date);
+  let cinemas = null;
+  let cinemasError = null;
+  try {
+    cinemas = await getMovieShowTimesForDate(movieId, date);
+  } catch (error) {
+    console.log("Error fetching show times:", error.message);
+    cinemasError = error;
+  }
+
   if (!movie) {
     return <div>Movie not found</div>;
   }
@@ -27,8 +36,9 @@ export default async function Page({ params, searchParams }) {
 
       {/* show time */}
       <ShowTimesSection
+        error={cinemasError}
         date={date}
-        showTimes={cinemas.showTimes}
+        showTimes={cinemasError ? null : cinemas.showTimes}
         movieId={movieId}
         languageFilter={languageFilter}
       />
