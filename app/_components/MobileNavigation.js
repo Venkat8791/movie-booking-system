@@ -6,6 +6,7 @@ import LoginButton from "./LoginButton";
 import { useAuth } from "../_context/AuthProvider";
 import UserComponent from "./UserComponent";
 import UserMenu from "./UserMenu";
+import Spinner from "./Spinner";
 
 function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
   const { auth, loading } = useAuth();
@@ -33,10 +34,9 @@ function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
             </Link>
           </li>
         ))}
+
         {loading ? (
-          <div className="flex justify-center items-center">
-            <div className="w-6 h-6 border-4 border-t-transparent border-gray-500 rounded-full animate-spin"></div>
-          </div>
+          <Spinner />
         ) : auth.isAuthenticated ? (
           <UserMenu />
         ) : (

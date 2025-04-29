@@ -11,6 +11,20 @@ export async function getUserData(id) {
   return data;
 }
 
+export const getCurrentUser = async () => {
+  console.log("inside get current user");
+  const res = await fetch(
+    "http://localhost:8080/mxmovies/v1/api/current-user",
+    {
+      credentials: "include",
+    }
+  );
+
+  if (!res.ok) throw new Error("User not authenticated");
+
+  return await res.json();
+};
+
 export async function updateUserProfile(user) {
   console.log(user);
   const res = await fetch(

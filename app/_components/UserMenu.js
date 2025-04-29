@@ -7,17 +7,21 @@ import { useAuth } from "../_context/AuthProvider";
 import toast from "react-hot-toast";
 
 function UserMenu() {
-  const { setAuth } = useAuth();
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userId");
+  const { auth, setAuth } = useAuth();
+  const handleLogout = async () => {
+    await fetch("http://localhost:8080/mxmovies/v1/api/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    // Clear your AuthContext
     setAuth({
       isAuthenticated: false,
+      firstName: null,
+      email: null,
       userId: null,
-      userName: null,
-      token: null,
-      expiry: null,
     });
+
     toast.success("Logged out successfully");
     router.push("/");
     router.refresh();
@@ -28,7 +32,11 @@ function UserMenu() {
     <div className="relative inline-block text-left w-full">
       <Menu>
         <MenuButton className="inline-flex justify-between items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md shadow-sm w-full">
-          Guest
+          {auth.isAuthenticated
+            ? auth.firstName !== null
+              ? auth.firstName
+              : "Guest"
+            : "Guest"}
           <ChevronDownIcon className="ml-2 h-5 w-5" />
         </MenuButton>
         <MenuItems className="absolute right-0 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/10 focus:outline-none z-10">
