@@ -9,6 +9,8 @@ const AuthProvider = ({ children }) => {
     isAuthenticated: false,
     firstName: null,
     email: null,
+    lastName: null,
+    phoneNumber: null,
   });
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +23,8 @@ const AuthProvider = ({ children }) => {
           isAuthenticated: true,
           firstName: userData.firstName,
           email: userData.email,
+          lastName: userData.lastName,
+          phoneNumber: userData.phoneNumber,
         });
       } catch (error) {
         setAuth({
@@ -28,6 +32,8 @@ const AuthProvider = ({ children }) => {
           isAuthenticated: false,
           firstName: null,
           email: null,
+          phoneNumber: null,
+          lastName: null,
         });
       } finally {
         setLoading(false);

@@ -1,46 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { updateUserProfile } from "../_lib/user-data-service";
+import { getCurrentUser, updateUserProfile } from "../_lib/user-data-service";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 function ProfileComponent() {
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState();
   const router = useRouter();
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      const userId = localStorage.getItem("userId");
-
-      if (!userId) return;
-
-      const res = await fetch(
-        "http://localhost:8080/mxmovies/v1/users/" + userId
-      );
-
-      const data = await res.json();
-      setProfileData(data);
+    const fetchUser = async () => {
+      try {
+        const data = await getCurrentUser();
+        setProfileData(data);
+        console.log(data);
+      } catch (err) {
+        console.error("failed to fetch current user");
+      }
     };
 
-    fetchProfile();
+    fetchUser();
   }, []);
 
   const handleSubmit = async (e) => {
+    console.log(profileData);
     e.preventDefault();
-    const userId = localStorage.getItem("userId");
-    if (!userId) return;
-
-    try {
-      await updateUserProfile({
-        userId: userId,
-        username: profileData.username,
-        emailId: profileData.emailId,
-        phoneNumber: profileData.phoneNumber,
-      });
+    const data = await updateUserProfile(profileData);
+    if (data.message === "User Updated Successfully") {
       toast.success("Profile updated successfully!");
-    } catch (error) {
-      console.error(error);
+    } else {
       toast.error("Failed to update profile.");
     }
     router.refresh();
@@ -55,21 +44,35 @@ function ProfileComponent() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex items-center justify-center min-h-screen ">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-semibold text-center mb-6">My Profile</h1>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-gray-700 mb-1">Username</label>
+            <label className="block text-gray-700 mb-1">First Name</label>
             <input
               type="text"
               defaultValue={
-                profileData.username === null ? "---" : profileData.username
+                profileData.username === null ? "---" : profileData.firstName
               }
               className="w-full px-4 py-2 border rounded-md bg-gray-100"
               onChange={(e) =>
-                setProfileData({ ...profileData, username: e.target.value })
+                setProfileData({ ...profileData, firstName: e.target.value })
+              }
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1">Last Name</label>
+            <input
+              type="text"
+              defaultValue={
+                profileData.lastName === null ? "---" : profileData.lastName
+              }
+              className="w-full px-4 py-2 border rounded-md bg-gray-100"
+              onChange={(e) =>
+                setProfileData({ ...profileData, lastName: e.target.value })
               }
             />
           </div>
@@ -78,13 +81,11 @@ function ProfileComponent() {
             <label className="block text-gray-700 mb-1">Email ID</label>
             <input
               type="text"
+              disabled
               defaultValue={
-                profileData.emailId === null ? "---" : profileData.emailId
+                profileData.email === null ? "---" : profileData.email
               }
               className="w-full px-4 py-2 border rounded-md bg-gray-100"
-              onChange={(e) =>
-                setProfileData({ ...profileData, emailId: e.target.value })
-              }
             />
           </div>
 
@@ -92,9 +93,15 @@ function ProfileComponent() {
             <label className="block text-gray-700 mb-1">Phone Number</label>
             <input
               type="text"
-              defaultValue={profileData.phoneNumber}
-              disabled
+              defaultValue={
+                profileData.phoneNumber === null
+                  ? "---"
+                  : profileData.phoneNumber
+              }
               className="w-full px-4 py-2 border rounded-md bg-gray-100"
+              onChange={(e) =>
+                setProfileData({ ...profileData, phoneNumber: e.target.value })
+              }
             />
           </div>
 

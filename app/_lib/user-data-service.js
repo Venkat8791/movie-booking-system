@@ -27,22 +27,17 @@ export const getCurrentUser = async () => {
 
 export async function updateUserProfile(user) {
   console.log(user);
-  const res = await fetch(
-    "http://localhost:8080/mxmovies/v1/users/update-profile",
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    }
-  );
-  console.log(res);
+  const res = await fetch("http://localhost:8080/mxmovies/v1/api/update-user", {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
   if (!res.ok) {
     throw new Error("Failed to update profile");
   }
-
   const data = await res.json();
-  console.log(data);
-  //   revalidatePath("/profile");
+  return data;
 }

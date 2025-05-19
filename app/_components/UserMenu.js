@@ -20,6 +20,8 @@ function UserMenu() {
       firstName: null,
       email: null,
       userId: null,
+      lastName: null,
+      phoneNumber: null,
     });
 
     toast.success("Logged out successfully");

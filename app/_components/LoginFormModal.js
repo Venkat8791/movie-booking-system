@@ -6,7 +6,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, lazy, useState } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../_context/AuthProvider";
 
@@ -43,6 +43,8 @@ function LoginFormModal({ isOpen, onClose, onSignupClick }) {
       isAuthenticated: true,
       firstName: userData.firstName,
       email: userData.email,
+      lastName: userData.lastName,
+      phoneNumber: userData.phoneNumber,
     });
     setErrorMessage(null);
 
