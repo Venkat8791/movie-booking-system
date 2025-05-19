@@ -1,39 +1,33 @@
-export async function getMovies() {
-  const movies = await fetch("http://localhost:8080/mxmovies/v1/movies");
-  const data = await movies.json();
-  if (!data) {
-    throw new Error("Failed to fetch data");
-  }
+import { API_BASE_URL } from "@/config";
 
-  return data;
+export async function getMovies() {
+  const response = await fetch(`${API_BASE_URL}/movies`);
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
+  }
+  const movies = await response.json();
+  return movies;
 }
 
 export async function getMovie(id) {
-  const movie = await fetch("http://localhost:8080/mxmovies/v1/movies/" + id);
-  const data = await movie.json();
-  if (!data) {
-    throw new Error("Failed to fetch data");
+  const response = await fetch(`${API_BASE_URL}/movies/${id}`);
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
   }
-
-  return data;
+  const movie = await response.json();
+  return movie;
 }
 
 export async function getMovieShowTimesForDate(id, date) {
   const response = await fetch(
-    "http://localhost:8080/mxmovies/v1/movies/" +
-      id +
-      "/showtimes?showdate=" +
-      date
+    `${API_BASE_URL}/movies/${id}/showtimes?showdate=${date}`
   );
   if (!response.ok) {
-    console.log("Error fetching show times:", response.status);
     const errorResponse = await response.json();
     throw new Error(errorResponse.message);
   }
   const showTimes = await response.json();
-  if (!showTimes) {
-    throw new Error("Failed to fetch data");
-  }
-
   return showTimes;
 }

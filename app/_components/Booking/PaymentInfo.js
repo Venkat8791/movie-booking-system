@@ -8,11 +8,11 @@ function PaymentInfo({ totalAmount }) {
       </p>
       <div className="flex justify-between">
         <p>Sub Total</p>
-        <p>$ {totalAmount}</p>
+        <p>Rs {totalAmount}</p>
       </div>
       <div className="flex justify-between">
         <p>Grand Total</p>
-        <p>$ {totalAmount}</p>
+        <p>Rs {totalAmount}</p>
       </div>
     </div>
   );

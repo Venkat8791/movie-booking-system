@@ -1,6 +1,9 @@
+import { API_BASE_URL } from "@/config";
+//Not using this for now
+
 export async function sendOtp(phoneNumber) {
   const response = await fetch(
-    "http://localhost:8080/mxmovies/v1/api/otp/send?phoneNumber=" + phoneNumber,
+    `${API_BASE_URL}/api/otp/send?phoneNumber=${phoneNumber}`,
     {
       method: "POST",
       headers: {
@@ -20,10 +23,8 @@ export async function sendOtp(phoneNumber) {
 
 export async function verifyOtp(phoneNumber, otp) {
   const response = await fetch(
-    "http://localhost:8080/mxmovies/v1/api/otp/verify?phoneNumber=" +
-      phoneNumber +
-      "&otpCode=" +
-      otp,
+    `${API_BASE_URL}/api/otp/verify?phoneNumber=${phoneNumber}&otpCode=${otp}`,
+    phoneNumber + "&otpCode=" + otp,
     {
       method: "POST",
       headers: {

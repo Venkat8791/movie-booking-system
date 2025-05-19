@@ -8,16 +8,6 @@ import {
   getSeatsBookedForShowTime,
 } from "@/app/_lib/showtime-data-service";
 
-// const groupSeatsByRow = (seats) => {
-//   return seats.reduce((acc, seat) => {
-//     if (!acc[seat.rowNumber]) {
-//       acc[seat.rowNumber] = [];
-//     }
-//     acc[seat.rowNumber].push(seat);
-//     return acc;
-//   }, {});
-// };
-
 export default async function Page({ params, searchParams }) {
   const { showTimeId } = await params;
   const { movieId, cinemaId, showDate } = await searchParams;

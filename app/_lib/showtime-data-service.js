@@ -1,29 +1,23 @@
+import { API_BASE_URL } from "@/config";
+
 export async function getSeatsBookedForShowTime(id) {
-  const seats = await fetch(
-    "http://localhost:8080/mxmovies/v1/showtimes/" + id + "/bookedSeats"
-  );
-  const data = await seats.json();
-
-  if (!data) {
-    throw new Error("Failed to fetch data");
+  const response = await fetch(`${API_BASE_URL}/showtimes/${id}/bookedSeats`);
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
   }
-
-  return data;
+  const seats = await response.json();
+  return seats;
 }
 
 export async function getOtherShowTimes(movieId, cinemaId, showDate) {
-  const shows = await fetch(
-    "http://localhost:8080/mxmovies/v1/showtimes?showDate=" +
-      showDate +
-      "&cinemaId=" +
-      cinemaId +
-      "&movieId=" +
-      movieId
+  const response = await fetch(
+    `${API_BASE_URL}/showtimes?showDate=${showDate}&cinemaId=${cinemaId}&movieId=${movieId}`
   );
-
-  const data = await shows.json();
-  if (!data) {
-    throw new Error("Failed to fetch data");
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
   }
-  return data;
+  const showTimes = await response.json();
+  return showTimes;
 }

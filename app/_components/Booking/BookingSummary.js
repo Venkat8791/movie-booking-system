@@ -11,7 +11,10 @@ function BookingSummary({ selectedSeats, showTimeId }) {
   const { auth } = useAuth();
   const userId = auth.userId;
   const handleBooking = async (e) => {
-    e.preventDefault(); // prevent default form submit
+    e.preventDefault();
+    if (!auth.isAuthenticated) {
+      router.push("/login");
+    }
     const bookingRequest = {
       userId,
       showTimeId,
@@ -105,10 +108,10 @@ function BookingSummary({ selectedSeats, showTimeId }) {
 
       {selectedSeats.length > 0 && (
         <form onSubmit={handleBooking}>
-          <button className="fixed bottom-2 left-0 z-50  mx-auto block md:hidden text-white px-4 py-2 rounded  w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)]">
+          <button className="fixed bottom-1 left-0 z-50 mx-auto block md:hidden text-white px-4 py-2 rounded  w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)]">
             <div className="flex justify-between">
               <p>{selectedSeats.length} tickets</p>
-              <p>${totalAmount}</p>
+              <p>Rs {totalAmount}</p>
             </div>
           </button>
         </form>

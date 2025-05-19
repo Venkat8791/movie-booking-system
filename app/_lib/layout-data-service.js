@@ -1,9 +1,8 @@
+import { API_BASE_URL } from "@/config";
+
 export async function getSeatLayout(screenId) {
-  const response = await fetch(
-    "http://localhost:8080/mxmovies/v1/layouts/" + screenId
-  );
+  const response = await fetch(`${API_BASE_URL}/layouts/${screenId}`);
   if (!response.ok) {
-    console.log("Error fetching seat layout:", response.status);
     const errorResponse = await response.json();
     throw new Error(errorResponse.message);
   }

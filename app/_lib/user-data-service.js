@@ -1,33 +1,32 @@
 // import { revalidatePath } from "next/cache";
 
+import { API_BASE_URL } from "@/config";
+
 export async function getUserData(id) {
-  const user = await fetch("http://localhost:8080/mxmovies/v1/users/" + id);
-  const data = await user.json();
-
-  if (!data) {
-    throw new Error("Failed to fetch data");
+  const response = await fetch(`${API_BASE_URL}/users/${id}`);
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
   }
-
-  return data;
+  const user = await user.json();
+  return user;
 }
 
 export const getCurrentUser = async () => {
-  console.log("inside get current user");
-  const res = await fetch(
-    "http://localhost:8080/mxmovies/v1/api/current-user",
-    {
-      credentials: "include",
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/api/current-user`, {
+    credentials: "include",
+  });
 
-  if (!res.ok) throw new Error("User not authenticated");
-
-  return await res.json();
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
+  }
+  const currentUser = await res.json();
+  return currentUser;
 };
 
 export async function updateUserProfile(user) {
-  console.log(user);
-  const res = await fetch("http://localhost:8080/mxmovies/v1/api/update-user", {
+  const resposne = await fetch(`${API_BASE_URL}/api/update-user `, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -35,7 +34,7 @@ export async function updateUserProfile(user) {
     },
     body: JSON.stringify(user),
   });
-  if (!res.ok) {
+  if (!resposne.ok) {
     throw new Error("Failed to update profile");
   }
   const data = await res.json();
