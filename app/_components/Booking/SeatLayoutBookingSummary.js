@@ -1,6 +1,6 @@
 "use client";
-import { useSelectedSeats } from "../_context/SelectedSeatsProvider";
-import SeatLayout from "./SeatLayout";
+import { useSelectedSeats } from "../../_context/SelectedSeatsProvider";
+import SeatLayout from "../SeatLayout";
 import BookingSummary from "./BookingSummary";
 
 function SeatLayoutBookingSummary({

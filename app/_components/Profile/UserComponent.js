@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "../_context/AuthProvider";
+import { useAuth } from "../../_context/AuthProvider";
 
 function UserComponent() {
   const { auth, setAuth } = useAuth();

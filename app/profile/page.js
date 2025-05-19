@@ -1,4 +1,4 @@
-import ProfileComponent from "../_components/ProfileComponent";
+import ProfileComponent from "../_components/Profile/ProfileComponent";
 
 export default function page() {
   return (

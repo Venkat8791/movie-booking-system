@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import FilterDropDown from "./FilterDropDown";
+import FilterDropDown from "./Filters/FilterDropDown";
 
 const formatDate = (date) => {
   const day = date.getDate();

@@ -2,11 +2,10 @@
 import { X } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import LoginButton from "./LoginButton";
-import { useAuth } from "../_context/AuthProvider";
-import UserComponent from "./UserComponent";
-import UserMenu from "./UserMenu";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
+import UserMenu from "../Profile/UserMenu";
+import LoginButton from "../Login/LoginButton";
+import { useAuth } from "@/app/_context/AuthProvider";
 
 function MobileNavigation({ navLinks, isMenuOpen, setIsMenuOpen }) {
   const { auth, loading } = useAuth();

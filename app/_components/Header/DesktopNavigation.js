@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import LoginButton from "./LoginButton";
-import { useAuth } from "../_context/AuthProvider";
 
-import UserMenu from "./UserMenu";
-import Spinner from "./Spinner";
+import LoginButton from "../Login/LoginButton";
+import { useAuth } from "@/app/_context/AuthProvider";
+import UserMenu from "../Profile/UserMenu";
+import Spinner from "../Spinner";
 
 export default function DesktopNavigation({ navLinks, onLoginClick }) {
   const { auth, loading } = useAuth();

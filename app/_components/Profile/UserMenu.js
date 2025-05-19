@@ -3,7 +3,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../_context/AuthProvider";
+import { useAuth } from "../../_context/AuthProvider";
 import toast from "react-hot-toast";
 
 function UserMenu() {

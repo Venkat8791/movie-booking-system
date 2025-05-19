@@ -1,5 +1,5 @@
 import MovieHeaderInfo from "@/app/_components/MovieHeaderInfo";
-import SeatLayoutBookingSummary from "@/app/_components/SeatLayoutBookingSummary";
+import SeatLayoutBookingSummary from "@/app/_components/Booking/SeatLayoutBookingSummary";
 import ShowTimesList from "@/app/_components/ShowTimesList";
 import { SelectedSeatsProvider } from "@/app/_context/SelectedSeatsProvider";
 import { getSeatLayout } from "@/app/_lib/layout-data-service";

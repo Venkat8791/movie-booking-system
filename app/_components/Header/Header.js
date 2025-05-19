@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
-import Logo from "./Logo";
+import Logo from "../Logo";
 import { Clapperboard, Film, Home, Phone } from "lucide-react";
-
 import DesktopNavigation from "./DesktopNavigation";
-import MobileNavigation from "./MobileNavigation";
 import NavToggleButton from "./NavToggleButton";
-import LoginFormModal from "./LoginFormModal";
-import RegistrationFormModal from "./RegistrationFormModal";
+import MobileNavigation from "./MobileNavigation";
+import LoginFormModal from "../Login/LoginFormModal";
+import RegistrationFormModal from "../Login/RegistrationFormModal";
 
 const navLinks = [
   { name: "Home", href: "/", icon: <Home /> },

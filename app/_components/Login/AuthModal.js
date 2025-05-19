@@ -7,7 +7,7 @@ import {
 } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 import React, { Fragment } from "react";
-import { sendOtp } from "../_lib/auth-data-service";
+import { sendOtp } from "../../_lib/auth-data-service";
 
 function AuthModal({
   isOpen,

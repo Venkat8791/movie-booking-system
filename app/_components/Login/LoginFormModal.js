@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/app/_context/AuthProvider";
 import {
   Dialog,
   DialogPanel,
@@ -8,7 +9,6 @@ import {
 } from "@headlessui/react";
 import React, { Fragment, lazy, useState } from "react";
 import toast from "react-hot-toast";
-import { useAuth } from "../_context/AuthProvider";
 
 function LoginFormModal({ isOpen, onClose, onSignupClick }) {
   const { setAuth } = useAuth();

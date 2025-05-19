@@ -1,13 +1,15 @@
 "use client";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import SeatInfo from "./SeatInfo";
 import TicketInfo from "./TicketInfo";
 import PaymentInfo from "./PaymentInfo";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/_context/AuthProvider";
 
 function BookingSummary({ selectedSeats, showTimeId }) {
   const router = useRouter();
-  const userId = localStorage.getItem("userId");
+  const { auth } = useAuth();
+  const userId = auth.userId;
   const handleBooking = async (e) => {
     e.preventDefault(); // prevent default form submit
     const bookingRequest = {

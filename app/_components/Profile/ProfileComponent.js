@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getCurrentUser, updateUserProfile } from "../_lib/user-data-service";
+import {
+  getCurrentUser,
+  updateUserProfile,
+} from "../../_lib/user-data-service";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
