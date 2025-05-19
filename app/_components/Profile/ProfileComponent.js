@@ -7,6 +7,7 @@ import {
 } from "../../_lib/user-data-service";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import FormInput from "../UI/FormInput";
 
 function ProfileComponent() {
   const [profileData, setProfileData] = useState();
@@ -38,6 +39,14 @@ function ProfileComponent() {
     router.refresh();
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   if (!profileData) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -52,61 +61,46 @@ function ProfileComponent() {
         <h1 className="text-2xl font-semibold text-center mb-6">My Profile</h1>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-gray-700 mb-1">First Name</label>
-            <input
-              type="text"
-              defaultValue={
-                profileData.username === null ? "---" : profileData.firstName
-              }
-              className="w-full px-4 py-2 border rounded-md bg-gray-100"
-              onChange={(e) =>
-                setProfileData({ ...profileData, firstName: e.target.value })
-              }
-            />
-          </div>
+          <FormInput
+            id="firstName"
+            name="firstName"
+            label="First Name"
+            value={
+              profileData.firstName != null ? profileData.firstName : "---"
+            }
+            defaultValue={profileData.firstName}
+            onChange={handleInputChange}
+          />
 
-          <div>
-            <label className="block text-gray-700 mb-1">Last Name</label>
-            <input
-              type="text"
-              defaultValue={
-                profileData.lastName === null ? "---" : profileData.lastName
-              }
-              className="w-full px-4 py-2 border rounded-md bg-gray-100"
-              onChange={(e) =>
-                setProfileData({ ...profileData, lastName: e.target.value })
-              }
-            />
-          </div>
+          <FormInput
+            id="lastName"
+            name="lastName"
+            label="Last Name"
+            value={profileData.lastName != null ? profileData.lastName : "---"}
+            defaultValue={profileData.lastName}
+            onChange={handleInputChange}
+          />
 
-          <div>
-            <label className="block text-gray-700 mb-1">Email ID</label>
-            <input
-              type="text"
-              disabled
-              defaultValue={
-                profileData.email === null ? "---" : profileData.email
-              }
-              className="w-full px-4 py-2 border rounded-md bg-gray-100"
-            />
-          </div>
+          <FormInput
+            id="email"
+            name="email"
+            label="Email Id"
+            disabled={true}
+            value={profileData.email != null ? profileData.email : "---"}
+            defaultValue={profileData.email}
+            onChange={handleInputChange}
+          />
 
-          <div>
-            <label className="block text-gray-700 mb-1">Phone Number</label>
-            <input
-              type="text"
-              defaultValue={
-                profileData.phoneNumber === null
-                  ? "---"
-                  : profileData.phoneNumber
-              }
-              className="w-full px-4 py-2 border rounded-md bg-gray-100"
-              onChange={(e) =>
-                setProfileData({ ...profileData, phoneNumber: e.target.value })
-              }
-            />
-          </div>
+          <FormInput
+            id="phoneNumber"
+            name="phoneNumber"
+            label="Phone Number"
+            value={
+              profileData.phoneNumber != null ? profileData.phoneNumber : "---"
+            }
+            defaultValue={profileData.phoneNumber}
+            onChange={handleInputChange}
+          />
 
           <button
             type="submit"

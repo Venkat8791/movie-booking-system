@@ -8,6 +8,7 @@ import {
 } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import toast from "react-hot-toast";
+import FormInput from "../UI/FormInput";
 
 function RegistrationFormModal({ isOpen, onClose, onLoginClick }) {
   const [form, setForm] = useState({
@@ -17,6 +18,7 @@ function RegistrationFormModal({ isOpen, onClose, onLoginClick }) {
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -79,56 +81,43 @@ function RegistrationFormModal({ isOpen, onClose, onLoginClick }) {
               </p>
 
               <form className="mt-4" onSubmit={handleSignup}>
-                <div className="mb-1">
-                  <label className="block">Email</label>
-                  <input
-                    type="text"
-                    name="email"
-                    value={form.email}
-                    placeholder="Enter email"
-                    className="w-full px-4 py-2 border rounded-md bg-gray-100"
-                    onChange={handleChange}
-                  />
-                </div>
+                <FormInput
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={form.email}
+                  onChange={handleChange}
+                />
                 <div>
                   {errorMessage && (
                     <p className="text-red-500 text-sm">{errorMessage}</p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label className="block">First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={form.firstName}
-                    placeholder="Enter first name"
-                    className="w-full px-4 py-2 border rounded-md bg-gray-100"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-1">
-                  <label className="block">Last Name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={form.lastName}
-                    placeholder="Enter last name"
-                    className="w-full px-4 py-2 border rounded-md bg-gray-100"
-                    onChange={handleChange}
-                  />
-                </div>
+                <FormInput
+                  id="firstName"
+                  name="firstName"
+                  label="First Name"
+                  value={form.firstName}
+                  onChange={handleChange}
+                />
+                <FormInput
+                  id="lastName"
+                  name="lastName"
+                  label="Last Name"
+                  value={form.lastName}
+                  onChange={handleChange}
+                />
 
-                <div className="mb-1">
-                  <label className="block">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={form.password}
-                    placeholder="Enter password"
-                    className="w-full px-4 py-2 border rounded-md bg-gray-100"
-                    onChange={handleChange}
-                  />
-                </div>
+                <FormInput
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type={showPassword ? "text" : "password"}
+                  value={form.password}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  onChange={handleChange}
+                />
 
                 <p className="text-sm font-normal mt-1">
                   By continuing, you agree to our{" "}

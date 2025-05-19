@@ -9,6 +9,7 @@ import {
 } from "@headlessui/react";
 import React, { Fragment, lazy, useState } from "react";
 import toast from "react-hot-toast";
+import FormInput from "../UI/FormInput";
 
 function LoginFormModal({ isOpen, onClose, onSignupClick }) {
   const { setAuth } = useAuth();
@@ -17,6 +18,8 @@ function LoginFormModal({ isOpen, onClose, onSignupClick }) {
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -92,29 +95,25 @@ function LoginFormModal({ isOpen, onClose, onSignupClick }) {
               </p>
 
               <form className="mt-4" onSubmit={handleLogin}>
-                <div className="mb-1">
-                  <label className="block">Email</label>
-                  <input
-                    type="text"
-                    name="email"
-                    value={form.email}
-                    placeholder="Enter email"
-                    className="w-full px-4 py-2 border rounded-md bg-gray-100"
-                    onChange={handleChange}
-                  />
-                </div>
+                <FormInput
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={form.email}
+                  onChange={handleChange}
+                />
 
-                <div className="mb-1">
-                  <label className="block">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={form.password}
-                    placeholder="Enter password"
-                    className="w-full px-4 py-2 border rounded-md bg-gray-100"
-                    onChange={handleChange}
-                  />
-                </div>
+                <FormInput
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type={showPassword ? "text" : "password"}
+                  value={form.password}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  onChange={handleChange}
+                />
+
                 <div>
                   {errorMessage && (
                     <p className="text-sm text-red-500">{errorMessage}</p>
