@@ -12,7 +12,7 @@ export async function getUserData(id) {
   return user;
 }
 
-export const getCurrentUser = async () => {
+export async function getCurrentUser() {
   const response = await fetch(`${API_BASE_URL}/api/current-user`, {
     credentials: "include",
   });
@@ -21,12 +21,12 @@ export const getCurrentUser = async () => {
     const errorResponse = await response.json();
     throw new Error(errorResponse.message);
   }
-  const currentUser = await res.json();
+  const currentUser = await response.json();
   return currentUser;
-};
+}
 
 export async function updateUserProfile(user) {
-  const resposne = await fetch(`${API_BASE_URL}/api/update-user `, {
+  const response = await fetch(`${API_BASE_URL}/api/update-user `, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -34,9 +34,9 @@ export async function updateUserProfile(user) {
     },
     body: JSON.stringify(user),
   });
-  if (!resposne.ok) {
+  if (!response.ok) {
     throw new Error("Failed to update profile");
   }
-  const data = await res.json();
+  const data = await response.json();
   return data;
 }

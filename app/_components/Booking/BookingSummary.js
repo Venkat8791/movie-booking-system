@@ -8,26 +8,24 @@ import { useAuth } from "@/app/_context/AuthProvider";
 
 function BookingSummary({ selectedSeats, showTimeId }) {
   const router = useRouter();
-  const { auth } = useAuth();
-  const userId = auth.userId;
+  const auth = useAuth();
   const handleBooking = async (e) => {
     e.preventDefault();
     if (!auth.isAuthenticated) {
       router.push("/login");
     }
     const bookingRequest = {
-      userId,
       showTimeId,
       seatIds: selectedSeats.map((seat) => seat.seatId),
       totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
     };
-    console.log(bookingRequest);
 
     try {
       const response = await fetch(
         "http://localhost:8080/mxmovies/v1/bookings",
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",

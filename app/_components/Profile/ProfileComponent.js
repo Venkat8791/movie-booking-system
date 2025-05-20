@@ -20,7 +20,7 @@ function ProfileComponent() {
         setProfileData(data);
         console.log(data);
       } catch (err) {
-        console.error("failed to fetch current user");
+        console.error("failed to fetch current user", err);
       }
     };
 
