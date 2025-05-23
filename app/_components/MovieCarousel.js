@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import Image from "next/image";
 
 function MovieCarousel({ movies }) {
   return (
@@ -30,10 +31,12 @@ function MovieCarousel({ movies }) {
               <div className="w-full h-full p-2 flex text-white  md:bg-gradient-to-l from-[#f59e0b] to-gray-800">
                 {/* Poster on the Left */}
                 <div className="w-full md:w-1/2 h-full ">
-                  <img
+                  <Image
                     src={movie.posterUrl}
                     alt={movie.title}
                     className="w-full h-full object-contain "
+                    width={500}
+                    height={500}
                   />
                 </div>
 

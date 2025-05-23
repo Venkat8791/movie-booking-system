@@ -6,13 +6,13 @@ const BookingsList = ({ bookings }) => {
   const router = useRouter();
   console.log(bookings);
   return (
-    <div className="flex flex-col gap-2 px-4 py-8 max-w-[50vw]">
+    <div className="flex flex-col gap-2 px-4 py-8">
       {bookings.map((booking) => (
         <div
           key={booking.bookingId}
-          className="bg-white shadow-lg rounded-2xl flex overflow-hidden "
+          className="bg-white shadow-lg rounded-2xl flex justify-between overflow-hidden "
         >
-          <div className="w-[150px] h-[150px]">
+          <div className="hidden md:block w-[150px] h-[150px]">
             <Image
               src={booking.movie.posterUrl}
               alt={booking.movie.title}
@@ -21,18 +21,19 @@ const BookingsList = ({ bookings }) => {
               className="object-cover rounded"
             />
           </div>
-          <div className="flex flex-col p-2 justify-between">
-            <div>
+
+          <div className="flex flex-col gap-4 sm:flex-row p-2 justify-around w-[100%] md:w-[70%] ">
+            <div className="flex flex-col justify-center items-start">
               <p className="text-md font-semibold">{booking.movie.title}</p>
               <p className="text-green-300 font-bold">Tickets Booked</p>
-              <p className="text-sm">11 Jan 2024, 07:39PM</p>
+              <p className="text-sm">11 Jan 2024 07:39PM</p>
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex flex-col justify-center items-start ">
               <button
                 onClick={() => router.push(`/bookings/${booking.bookingId}`)}
-                className="w-full bg-[var(--accent)] text-white p-1 rounded hover:bg-[var(--accent-hover)] transition-colors "
+                className="w-full bg-[var(--accent)] text-white px-2 py-1 rounded hover:bg-[var(--accent-hover)] transition-colors "
               >
-                View Details
+                View Booking
               </button>
             </div>
           </div>
