@@ -28,3 +28,22 @@ export async function getAllBookings() {
   console.log(data);
   return data;
 }
+
+export async function bookShow(bookingRequest) {
+  const response = await fetch(`${API_BASE_URL}/bookings`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+    },
+    body: JSON.stringify(bookingRequest),
+  });
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.message);
+  }
+  const data = await response.json();
+  return data;
+}

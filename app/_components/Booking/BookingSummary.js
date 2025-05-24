@@ -5,46 +5,32 @@ import SeatInfo from "./SeatInfo";
 import TicketInfo from "./TicketInfo";
 import PaymentInfo from "./PaymentInfo";
 import { useAuth } from "@/app/_context/AuthProvider";
+import useApi from "@/app/hooks/useApi";
+import { bookShow } from "@/app/_lib/booking-data-service";
+import Spinner from "../Spinner";
 
 function BookingSummary({ selectedSeats, showTimeId }) {
   const router = useRouter();
-  const auth = useAuth();
+  const { auth, loading: authLoading } = useAuth();
+
+  const { loading, error, callApi } = useApi(bookShow);
   const handleBooking = async (e) => {
     e.preventDefault();
+
     if (!auth.isAuthenticated) {
       router.push("/login");
+      return;
     }
+
     const bookingRequest = {
       showTimeId,
       seatIds: selectedSeats.map((seat) => seat.seatId),
       totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
     };
 
-    try {
-      const response = await fetch(
-        "http://localhost:8080/mxmovies/v1/bookings",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST",
-          },
-          body: JSON.stringify(bookingRequest),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        router.push("/bookings/" + data.bookingId);
-        router.refresh();
-      } else {
-        // handle error response
-        console.error("Booking failed");
-      }
-    } catch (error) {
-      console.error("Booking error:", error);
+    const bookingResponse = await callApi(bookingRequest);    
+    if (bookingResponse) {
+      router.push(`/bookings/${bookingResponse.bookingId}`);
     }
   };
 
@@ -57,6 +43,16 @@ function BookingSummary({ selectedSeats, showTimeId }) {
   );
 
   const totalAmount = selectedSeats.reduce((acc, seat) => acc + seat.price, 0);
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full p-4 bg-red-400">
+        <p className="font-semibold text-gray-500">
+          Booking Failed. Please try again
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full p-4 md:w-1/3 shadow-lg md:max-h-[100vh]">
@@ -96,10 +92,17 @@ function BookingSummary({ selectedSeats, showTimeId }) {
       {selectedSeats.length > 0 && (
         <form onSubmit={handleBooking}>
           <button
+            disabled={loading}
             className="hidden md:block text-white px-4 py-2 rounded mt-2 w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)]"
             type="submit"
           >
-            Proceed
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <Spinner size="sm" /> Booking...
+              </span>
+            ) : (
+              "Proceed"
+            )}
           </button>
         </form>
       )}
