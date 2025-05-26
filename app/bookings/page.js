@@ -21,16 +21,20 @@ export default function BookingsPage() {
     };
     fetchBookings();
   }, [isAuthenticated]);
+
+  let content;
+  if (loading) {
+    content = <p>Loading bookings...</p>;
+  } else if (bookings.length === 0) {
+    content = <p>No bookings found.</p>;
+  } else {
+    content = <BookingsList bookings={bookings} />;
+  }
+
   return (
     <div className="max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold px-4 mt-8 mb-4">My Bookings</h1>
-      {loading ? (
-        <p>Loading bookings...</p>
-      ) : bookings.length === 0 ? (
-        <p>No bookings found.</p>
-      ) : (
-        <BookingsList bookings={bookings} />
-      )}
+      {content}
     </div>
   );
 }

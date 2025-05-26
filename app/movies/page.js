@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import MovieCard from "../_components/MovieCard";
 import MovieList from "../_components/MovieList";
 
 export const metadata = {
