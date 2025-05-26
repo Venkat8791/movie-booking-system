@@ -5,8 +5,7 @@ import { Clapperboard, Film, Home, Phone } from "lucide-react";
 import DesktopNavigation from "./DesktopNavigation";
 import NavToggleButton from "./NavToggleButton";
 import MobileNavigation from "./MobileNavigation";
-import LoginFormModal from "../Login/LoginFormModal";
-import RegistrationFormModal from "../Login/RegistrationFormModal";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { name: "Home", href: "/", icon: <Home /> },
@@ -16,8 +15,8 @@ const navLinks = [
 ];
 
 export default function Header() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [authModal, setAuthModal] = useState(null);
 
   return (
     <header>
@@ -26,7 +25,7 @@ export default function Header() {
         <div className="flex items-center">
           <DesktopNavigation
             navLinks={navLinks}
-            onLoginClick={() => setAuthModal("login")}
+            onLoginClick={() => router.push("/login")}
           />
 
           {/* mobile menu button */}
@@ -40,23 +39,7 @@ export default function Header() {
               navLinks={navLinks}
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
-              onLoginClick={() => setAuthModal("login")}
-            />
-          )}
-
-          {authModal === "login" && (
-            <LoginFormModal
-              isOpen={authModal === "login"}
-              onClose={() => setAuthModal(null)}
-              onSignupClick={() => setAuthModal("signup")}
-            />
-          )}
-
-          {authModal === "signup" && (
-            <RegistrationFormModal
-              isOpen={authModal === "signup"}
-              onClose={() => setAuthModal(null)}
-              onLoginClick={() => setAuthModal("login")}
+              onLoginClick={() => router.push("/login")}
             />
           )}
         </div>

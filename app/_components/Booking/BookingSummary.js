@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import SeatInfo from "./SeatInfo";
 import TicketInfo from "./TicketInfo";
 import PaymentInfo from "./PaymentInfo";
@@ -11,14 +11,17 @@ import Spinner from "../Spinner";
 
 function BookingSummary({ selectedSeats, showTimeId }) {
   const router = useRouter();
-  const { auth, loading: authLoading } = useAuth();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const fullPath = `${pathname}?${searchParams.toString()}`;
+  const { auth } = useAuth();
 
   const { loading, error, callApi } = useApi(bookShow);
   const handleBooking = async (e) => {
     e.preventDefault();
 
     if (!auth.isAuthenticated) {
-      router.push("/login");
+      router.push(`/login?redirect=${encodeURIComponent(fullPath)}`);
       return;
     }
 
@@ -28,7 +31,7 @@ function BookingSummary({ selectedSeats, showTimeId }) {
       totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
     };
 
-    const bookingResponse = await callApi(bookingRequest);    
+    const bookingResponse = await callApi(bookingRequest);
     if (bookingResponse) {
       router.push(`/bookings/${bookingResponse.bookingId}`);
     }
